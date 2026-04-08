@@ -1,0 +1,72 @@
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.csproj.AssemblyReference.cache
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.GeneratedMSBuildEditorConfig.editorconfig
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.AssemblyInfoInputs.cache
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.AssemblyInfo.cs
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.csproj.CoreCompileInputs.cache
+D:\MODSWXB\coremod\测试\重生99次\bin\Debug\net10.0\SampleSimple.deps.json
+D:\MODSWXB\coremod\测试\重生99次\bin\Debug\net10.0\SampleSimple.dll
+D:\MODSWXB\coremod\测试\重生99次\bin\Debug\net10.0\SampleSimple.pdb
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.dll
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\refint\SampleSimple.dll
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\SampleSimple.pdb
+D:\MODSWXB\coremod\测试\重生99次\obj\Debug\net10.0\ref\SampleSimple.dll
+D:\MODSWXB\coremod\测试\无敌时刻\bin\Debug\net10.0\SampleSimple.deps.json
+D:\MODSWXB\coremod\测试\无敌时刻\bin\Debug\net10.0\SampleSimple.dll
+D:\MODSWXB\coremod\测试\无敌时刻\bin\Debug\net10.0\SampleSimple.pdb
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.csproj.AssemblyReference.cache
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.GeneratedMSBuildEditorConfig.editorconfig
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.AssemblyInfoInputs.cache
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.AssemblyInfo.cs
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.csproj.CoreCompileInputs.cache
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.dll
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\refint\SampleSimple.dll
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\SampleSimple.pdb
+D:\MODSWXB\coremod\测试\无敌时刻\obj\Debug\net10.0\ref\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\bin\Debug\net10.0\SampleSimple.deps.json
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\bin\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\bin\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.csproj.AssemblyReference.cache
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.GeneratedMSBuildEditorConfig.editorconfig
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.AssemblyInfoInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.AssemblyInfo.cs
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.csproj.CoreCompileInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\refint\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\测试\观察状态\obj\Debug\net10.0\ref\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.csproj.AssemblyReference.cache
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.GeneratedMSBuildEditorConfig.editorconfig
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.AssemblyInfoInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.AssemblyInfo.cs
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.csproj.CoreCompileInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\refint\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\bin\Debug\net10.0\SampleSimple.deps.json
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\bin\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\bin\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\测试\传送关卡\obj\Debug\net10.0\ref\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\bin\Debug\net10.0\SampleSimple.deps.json
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\bin\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\bin\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.csproj.AssemblyReference.cache
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.GeneratedMSBuildEditorConfig.editorconfig
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.AssemblyInfoInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.AssemblyInfo.cs
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.csproj.CoreCompileInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\refint\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuansong\demo\obj\Debug\net10.0\ref\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.csproj.AssemblyReference.cache
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.GeneratedMSBuildEditorConfig.editorconfig
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.AssemblyInfoInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.AssemblyInfo.cs
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.csproj.CoreCompileInputs.cache
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\refint\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\bin\Debug\net10.0\SampleSimple.deps.json
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\bin\Debug\net10.0\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\bin\Debug\net10.0\SampleSimple.pdb
+D:\steama\steamapps\common\Dead Cells\coremod\demo\addshanghai\demo\obj\Debug\net10.0\ref\SampleSimple.dll

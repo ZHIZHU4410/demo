@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "4J/faUGEeTE=",
+  "success": true,
+  "projectFilePath": "D:\\steama\\steamapps\\common\\Dead Cells\\coremod\\demo\\addshanghai\\demo\\SampleSimple.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\10113\\.nuget\\packages\\deadcellscoremodding.mdk\\1.0.1\\deadcellscoremodding.mdk.1.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

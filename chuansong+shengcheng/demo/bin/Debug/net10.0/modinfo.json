@@ -1,0 +1,10 @@
+{
+  "name": "Simple",
+  "version": "1.0.0",
+  "type": "mod",
+  "assemblies": [
+    "SampleSimple.dll"
+  ],
+  "main": "SampleSimple.SimpleMod",
+  "dependencies": []
+}
