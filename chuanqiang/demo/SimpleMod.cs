@@ -79,11 +79,10 @@ namespace SampleSimple
         private const double One = 1.0;
         private const double DefaultVolume = 1.0;
         private const double DefaultPitch = 1.0;
-
-        // 颜色常量（可自行修改）
         private const string ColorRed = "#ff0000";
+        private const string ColorWhite = "#FFFFFF";
         private const string ColorDarkRed = "#fdfdfd";
-        private const string ColorLightPink = "#ff0000";
+        private const string ColorLightPink = "#FFFFFF";
 
         // 穿墙标志
         private bool isnowall = false;
@@ -113,9 +112,11 @@ namespace SampleSimple
         private bool _isNKeyPressed = false;
         private bool _isMKeyPressed = false;
         private bool _isKKeyPressed = false;
+        private bool _isTKeyPressed = false;
         private const int VK_N = 0x4E;
         private const int VK_M = 0x4D;
         private const int VK_K = 0x4B;
+        private const int VK_T = 0x54;
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
         private static extern short GetAsyncKeyState(int vkey);
@@ -131,8 +132,7 @@ namespace SampleSimple
             Hook_TargetHelper.filterBySight += Hook_TargetHelper_filterBySight;
             Hook_SnakeFang.onExecute += Hook_SnakeFang_onExecute;
 
-            System.Console.WriteLine("✅ SimpleMod 初始化完成（含 SnakeFang 穿墙传送特效）");
-            System.Console.WriteLine("   按 N 传送上一关，按 M 传送下一关，按 K 切换方向反转");
+            System.Console.WriteLine("SimpleMod 初始化完成");
         }
 
         // ---------- SnakeFang 钩子实现 ----------
@@ -218,7 +218,7 @@ namespace SampleSimple
             tile.dx = (int)-(tile.width * HalfFactor);
             tile.dy = -tile.height;
 
-            var onionSkin = OnionSkin.Class.fromEntity(hero, null, ColorFromHex(ColorRed), Ref<double>.In(DefaultAlpha), Ref<double>.In(DefaultSec), Ref<bool>.Null, Ref<bool>.Null, Ref<double>.Null);
+            var onionSkin = OnionSkin.Class.fromEntity(hero, null, ColorFromHex(ColorWhite), Ref<double>.In(DefaultAlpha), Ref<double>.In(DefaultSec), Ref<bool>.Null, Ref<bool>.Null, Ref<double>.Null);
             double offsetAmount = -hero.dir * OffsetAmount;
             onionSkin.offset(offsetAmount, 0.0);
             onionSkin.dx = hero.dir * DirectionOffset;
@@ -256,10 +256,6 @@ namespace SampleSimple
             var res = Info.ModRoot!.GetFilePath("res.pak");
             if (System.IO.File.Exists(res))
                 FsPak.Instance.FileSystem.loadPak(res.AsHaxeString());
-            // 注意：原 Entry.cs 中的 CDBManager 调用已被移除，因为当前环境缺少该类型。
-            // 如果你需要重新加载游戏数据库，请确保 CDBManager 可用并取消注释以下代码：
-            // var json = CDBManager.Class.instance.getAlteredCDB();
-            // dc.Data.Class.loadJson(json, default);
         }
 
         // ---------- 按键功能（保留原有） ----------
@@ -274,6 +270,14 @@ namespace SampleSimple
             if (isMPressedNow && !_isMKeyPressed)
                 TeleportToNextLevel();
             _isMKeyPressed = isMPressedNow;
+
+            bool isTPressedNow = GetAsyncKeyState(VK_T) < 0;
+            if (isTPressedNow && !_isTKeyPressed)
+            {
+                Logger.Information("物品生成键被按下，触发Spawn！");
+                TriggerSpawnEvent();
+            }
+            _isTKeyPressed = isTPressedNow;
         }
 
         private void TeleportToPrevLevel()
@@ -315,6 +319,27 @@ namespace SampleSimple
                 System.Console.WriteLine($"[传送] 从 {currentMapId} (深度{currentWorldDepth}) 传送至 {targetMapKey} (深度{targetWorldDepth})");
             }
             catch (Exception ex) { System.Console.WriteLine($"[传送-下一级] 错误：{ex.Message}"); }
+        }
+
+        private void TriggerSpawnEvent()
+        {
+            var hero = ModCore.Modules.Game.Instance.HeroInstance;
+            if (hero == null) return;
+
+            var itemPool = new (string id,InventItemKind kind)[]
+            {
+                ("AllUp",new InventItemKind.Consumable("AllUp".AsHaxeString()))
+            };
+            var random = new Random();
+            var selected = itemPool[random.Next(itemPool.Length)];
+
+            InventItem testItem = new InventItem(selected.kind);
+            bool test_boolean = false;
+
+            ItemDrop itemDrop = new ItemDrop(hero._level, hero.cx, hero.cy, testItem, true, new HaxeProxy.Runtime.Ref<bool>(ref test_boolean));
+            itemDrop.init();
+            itemDrop.onDropAsLoot();
+            itemDrop.dx = hero.dx;
         }
 
         private void ToggleInvertMovement()

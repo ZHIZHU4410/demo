@@ -70,3 +70,4 @@ D:\steama\steamapps\common\Dead Cells\coremod\demo\chuanqiang\demo\bin\Debug\net
 D:\steama\steamapps\common\Dead Cells\coremod\demo\chuanqiang\demo\bin\Debug\net10.0\SampleSimple.dll
 D:\steama\steamapps\common\Dead Cells\coremod\demo\chuanqiang\demo\bin\Debug\net10.0\SampleSimple.pdb
 D:\steama\steamapps\common\Dead Cells\coremod\demo\chuanqiang\demo\obj\Debug\net10.0\ref\SampleSimple.dll
+D:\steama\steamapps\common\Dead Cells\coremod\demo\chuanqiang\demo\obj\Debug\net10.0\SampleSimple.sourcelink.json
