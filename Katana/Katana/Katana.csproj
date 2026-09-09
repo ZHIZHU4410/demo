@@ -5,26 +5,46 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <ModType>mod</ModType>
+    <ModName>Katana</ModName>
     <ModMain>Katana.KatanaMain</ModMain>
     <AutoInstallMod Condition="'$(Configuration)' == 'Debug'">true</AutoInstallMod>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <Target Name="CopyModFiles" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+  <PropertyGroup>
+    <GenerateDiffCDB>false</GenerateDiffCDB>
+    <GameVersion>35</GameVersion>
+    <GenerateSinglePakFile>true</GenerateSinglePakFile>
+  </PropertyGroup>
+
+  <!-- ============ 数据补丁打包（仿照 BumpBootsOverhaul / DiverseDeckOverhaul） ============
+       data.cdb（patch_katana_cdb.py 基于 MDK v35 模板生成：居合距离加长 / 平砍起手改居合动作）
+         -> DCCMTool cdb diff（对比游戏模板） -> diff.pak
+         -> pak unpack -> Assets/data.cdb_/weapon/Katana.json
+       然后由 MDK 的 PackAssetsIntoPak（GenerateSinglePakFile=true）把 Assets/**/*
+       打成 res.pak 并自动安装到 coremod/mods/Katana/ -->
+  <PropertyGroup>
+    <ModCdbFile>$(MSBuildProjectDirectory)/data.cdb</ModCdbFile>
+    <TemplateCdbFile>$(_DCCM_Root)core/mdk/databases/v$(GameVersion)/data.cdb</TemplateCdbFile>
+    <DiffPakPath>$(IntermediateOutputPath)_diffCDB.pak</DiffPakPath>
+    <AssetDiffDir>$(MSBuildProjectDirectory)/Assets/data.cdb_</AssetDiffDir>
+  </PropertyGroup>
+
+  <Target Name="BuildResPak"
+          BeforeTargets="PackAssetsIntoPak"
+          Condition="Exists('$(ModCdbFile)')">
+    <Message Importance="high" Text="[Katana] 生成数据补丁 -> Assets/data.cdb_ ..." />
+    <RemoveDir Directories="$(AssetDiffDir)" />
+    <Exec Command="dotnet &quot;$(_DCCM_Root)core/mdk/tools/DCCMTool.dll&quot; cdb diff -i &quot;$(ModCdbFile)&quot; -t &quot;$(TemplateCdbFile)&quot; -o &quot;$(DiffPakPath)&quot;" />
+    <Exec Command="dotnet &quot;$(_DCCM_Root)core/mdk/tools/DCCMTool.dll&quot; pak unpack -i &quot;$(DiffPakPath)&quot; -o &quot;$(MSBuildProjectDirectory)/Assets&quot;" />
+    <!-- Assets 在项目评估期还不存在，必须动态追加 PackAssets，供 PackAssetsIntoPak 收集 -->
     <ItemGroup>
-      <ModFiles Include="$(OutputPath)output\Katana\**\*.*" />
+      <PackAssets Include="Assets/**/*" RootInPak="" />
     </ItemGroup>
-    <Copy SourceFiles="@(ModFiles)" DestinationFolder="D:\steama\steamapps\common\Dead Cells\coremod\mods\Katana\%(RecursiveDir)" />
   </Target>
 
   <ItemGroup>
     <PackageReference Include="DeadCellsCoreModding.MDK" Version="1.0.1" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <GenerateDiffCDB>false</GenerateDiffCDB>
-    <GameVersion>35</GameVersion>
-    <GenerateSinglePakFile>false</GenerateSinglePakFile>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
 
 </Project>
