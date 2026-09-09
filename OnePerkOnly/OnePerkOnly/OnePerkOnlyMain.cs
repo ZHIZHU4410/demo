@@ -17,8 +17,10 @@ using Hashlink.Proxy.Objects;
 using Hashlink.Virtuals;
 using HaxeProxy.Runtime;
 using ModCore.Events.Interfaces.Game;
+using ModCore.Events.Interfaces.Game.Hero;
 using ModCore.Menu;
 using ModCore.Mods;
+using ModCore.Modules;
 using ModCore.Storage;
 using ModCore.Utilities;
 using Serilog;
@@ -26,15 +28,25 @@ using Serilog;
 namespace OnePerkOnly
 {
     /// <summary>
-    /// 单一变异（Perk）模式（诊断版，全流程日志 + Inventory.add 暂不拦截的 A/B 版）。
+    /// 单一变异（Perk）模式。
     /// 在选项里选定唯一变异后：所有变异选择界面只允许选它，且可在每次遇到变异商人时重复拿（直到槽满）。
+    /// 叠加：随卷轴成长类变异经 getRelevantPerkTier 等效放大；固定阈值类（如处决 P_Execute_LowHealth）经
+    /// 运行时改写物品定义 props.prct = 基础值 × 持有份数 实现。
     /// </summary>
-    public class OnePerkOnlyMain : ModBase, IOnGameExit, IOnGameInit, IModMenu
+    public class OnePerkOnlyMain : ModBase, IOnGameExit, IOnGameInit, IModMenu, IOnHeroUpdate
     {
         public static Config<Configs> config { get; } = new Config<Configs>("OnePerkOnly");
 
         /// <summary>静态日志（Initialize 里从实例 Logger 缓存，写入 coremod\logs）。</summary>
         private static ILogger _log;
+
+        /// <summary>处决类变异（固定百分比阈值，不走卷轴 tier）的 id。</summary>
+        private const string EXEC_ID = "P_Execute_LowHealth";
+        /// <summary>处决阈值叠加上限（防 100% 秒杀）。</summary>
+        private const double EXEC_CAP = 0.9;
+        private static double? _execBasePrct;   // 处决基础阈值（首次读取并缓存）
+        private static int _execLastN = -1;     // 上次写入对应的持有份数
+        private static bool _execModified;      // 是否改写过 def.props.prct
 
         private static bool ModEnabled
         {
@@ -98,7 +110,87 @@ namespace OnePerkOnly
             Hook_Inventory.add -= OnInventoryAdd;
             Hook_Hero.applyItemPickEffect -= OnHeroApplyItemPickEffect;
             Hook_Entity.getRelevantPerkTier -= OnEntityGetRelevantPerkTier;
+            RestoreExecuteDef();
             _log.Information("[OnePerkOnly] 游戏退出，模组已卸载");
+        }
+
+        /// <summary>每帧同步：处决类变异把 def.props.prct 保持为 基础值×持有份数（拿 N 份 = 处决线 N 倍）。</summary>
+        void IOnHeroUpdate.OnHeroUpdate(double dt)
+        {
+            try { SyncExecuteThreshold(); }
+            catch { }
+        }
+
+        private static void SyncExecuteThreshold()
+        {
+            string pid = PerkId;
+            bool active = RestrictActive() && StackEnabled
+                          && pid != null && pid.Trim().Equals(EXEC_ID, StringComparison.OrdinalIgnoreCase);
+            if (!active)
+            {
+                RestoreExecuteDef();   // 关掉/换变异时还原基础值
+                return;
+            }
+
+            dc.en.Hero hero = ModCore.Modules.Game.Instance?.HeroInstance;
+            if (hero == null || hero.inventory == null) { RestoreExecuteDef(); return; }
+
+            int n = 0;
+            try { n = hero.inventory.countItemKind(H(EXEC_ID)); } catch { n = 0; }
+            if (n <= 1) { RestoreExecuteDef(); return; }   // 1 份 = 原版基础值
+
+            if (!_execBasePrct.HasValue)
+            {
+                try
+                {
+                    dynamic def = Data.Class.item.byId.get(H(EXEC_ID));
+                    if (def == null) return;
+                    object raw = def.props.prct;
+                    if (raw == null) { _execBasePrct = 0.0; return; }
+                    _execBasePrct = Convert.ToDouble(raw);
+                }
+                catch { return; }
+            }
+
+            if (n == _execLastN) return;   // 份数没变不用重复写
+            double v = _execBasePrct.Value * n;
+            if (v > EXEC_CAP) v = EXEC_CAP;
+            if (WriteExecutePrct(v))
+            {
+                _execLastN = n;
+                _execModified = true;
+                _log.Information($"[OnePerkOnly] 处决叠加: P_Execute_LowHealth x{n} prct {_execBasePrct.Value:F3} -> {v:F3}");
+            }
+        }
+
+        /// <summary>把处决变异的 props.prct 写为指定值；失败返回 false。</summary>
+        private static bool WriteExecutePrct(double v)
+        {
+            try
+            {
+                dynamic def = Data.Class.item.byId.get(H(EXEC_ID));
+                if (def == null) return false;
+                dynamic props = def.props;
+                props.prct = v;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _log.Warning($"[OnePerkOnly] 写处决 prct 失败: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>还原处决变异的 props.prct 为基础值（退出/关闭/份数<=1 时）。</summary>
+        private static void RestoreExecuteDef()
+        {
+            if (!_execModified) return;
+            if (_execBasePrct.HasValue && WriteExecutePrct(_execBasePrct.Value))
+            {
+                _log.Information($"[OnePerkOnly] 处决 prct 已还原为 {_execBasePrct.Value:F3}");
+            }
+            _execModified = false;
+            _execLastN = -1;
         }
 
         #endregion
